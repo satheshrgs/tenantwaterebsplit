@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   android-cd-build:
     name: Android CD Build
@@ -68,4 +72,21 @@ jobs:
         with:
           name: android-cd-build-app
           path: android/app/build/outputs/apk/release/app-release.apk
+      
+      - name: Post comment on PR
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            const runId = process.env.GITHUB_RUN_ID;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const artifactUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
+            const commentBody = `🎉 The Android APK build is ready! You can download it from the [Github Actions Runs Page](${artifactUrl}).`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner,
+              repo,
+              body: commentBody,
+            });
           
