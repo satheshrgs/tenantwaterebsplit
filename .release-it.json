@@ -1,7 +1,8 @@
 {
   "$schema": "https://unpkg.com/release-it/schema/release-it.json",
   "git": {
-    "commitMessage": "chore: release v${version}"
+    "commitMessage": "chore: release v${version}",
+    "pushRepo": "git@github.com:satheshrgs/tenantwaterebsplit.git"
   },
   "github": {
     "release": true
