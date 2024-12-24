@@ -1,12 +1,12 @@
-name: Android CD Build
+name: Android Release Build
 on:
   workflow_dispatch:
   release:
     types: [published]
 
 jobs:
-  android-cd-build:
-    name: Android CD Build
+  android-release-build:
+    name: Android Release Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -62,5 +62,5 @@ jobs:
       - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
-          name: android-cd-build-app-bundle
+          name: android-release-build-app-bundle
           path: android/app/build/outputs/bundle/release/app-release.aab
