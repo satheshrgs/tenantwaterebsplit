@@ -9,7 +9,17 @@
   "plugins": {
     "@release-it/conventional-changelog": {
       "preset": {
-        "name": "conventionalcommits"
+        "name": "conventionalcommits",
+        "types": [
+          { "type": "feat", "section": "Features" },
+          { "type": "fix", "section": "Bug Fix" },
+          { "type": "chore", "section": "Chores" },
+          { "type": "docs", "section": "Documentation" },
+          { "type": "style", "section": "Style" },
+          { "type": "refactor", "section": "Refactor" },
+          { "type": "perf", "section": "Performance" },
+          { "type": "test", "section": "Tests" }
+        ]
       },
       "infile": "CHANGELOG.md"
     }
