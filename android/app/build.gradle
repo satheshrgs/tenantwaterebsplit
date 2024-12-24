@@ -92,15 +92,27 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            def propertiesFile = file('../../sathesh-android-signing-key.properties')
+            if (propertiesFile.exists()) {
+                def fileInputStream = new FileInputStream(propertiesFile)
+                def props = new Properties()
+                props.load(fileInputStream)
+                fileInputStream.close()
+
+                storeFile = file(props['storeFilePath'])
+                storePassword = props['storePassword']
+                keyAlias = props['keyAlias']
+                keyPassword = props['keyPassword']
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
