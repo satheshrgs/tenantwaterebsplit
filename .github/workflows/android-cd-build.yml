@@ -1,4 +1,4 @@
-name: Android Build
+name: Android CD Build
 on:
   workflow_dispatch:
   push:
@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  android-build:
-    name: Android Build
+  android-cd-build:
+    name: Android CD Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -66,6 +66,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: android-app
+          name: android-cd-build-app
           path: android/app/build/outputs/apk/release/app-release.apk
           
