@@ -8,7 +8,13 @@
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "angular"
+      "preset": "angular",
+      "types": [
+        { "type": "feat", "section": "Features" },
+        { "type": "fix", "section": "Bug Fix" },
+        { "type": "chore", "section": "Chores" }
+      ],
+      "infile": "CHANGELOG.md"
     }
   },
   "hooks": {
