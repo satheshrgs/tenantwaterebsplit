@@ -52,7 +52,7 @@ jobs:
 
       - name: Create signing properties file
         run: |
-          echo "storeFilePath=./sathesh-android-signing-key.keystore" > sathesh-android-signing-key.properties
+          echo "storeFilePath=../../sathesh-android-signing-key.keystore" > sathesh-android-signing-key.properties
           echo "storePassword=${{ secrets.SATHESH_ANDROID_SIGNING_KEY_STORE_PASSWORD }}" >> sathesh-android-signing-key.properties
           echo "keyAlias=${{ secrets.SATHESH_ANDROID_SIGNING_KEY_ALIAS }}" >> sathesh-android-signing-key.properties
           echo "keyPassword=${{ secrets.SATHESH_ANDROID_SIGNING_KEY_PASSWORD }}" >> sathesh-android-signing-key.properties
