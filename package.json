@@ -2,6 +2,10 @@
   "name": "tenantwaterebsplit",
   "version": "0.0.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/satheshrgs/tenantwaterebsplit.git"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
