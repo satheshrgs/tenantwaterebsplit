@@ -1,0 +1,71 @@
+name: Android CD Build
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  android-cd-build:
+    name: Android CD Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version-file: .nvmrc
+
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+          cache: gradle
+
+      - name: Cache Gradle dependencies and wrapper
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Create signing properties file
+        run: |
+          echo "storeFilePath=../../sathesh-android-signing-key.keystore" > sathesh-android-signing-key.properties
+          echo "storePassword=${{ secrets.SATHESH_ANDROID_SIGNING_KEY_STORE_PASSWORD }}" >> sathesh-android-signing-key.properties
+          echo "keyAlias=${{ secrets.SATHESH_ANDROID_SIGNING_KEY_ALIAS }}" >> sathesh-android-signing-key.properties
+          echo "keyPassword=${{ secrets.SATHESH_ANDROID_SIGNING_KEY_PASSWORD }}" >> sathesh-android-signing-key.properties
+
+      - name: Decode and write base64 key to keystore file from secret
+        run: echo "${{ secrets.SATHESH_ANDROID_SIGNING_KEY_BASE64 }}" | base64 --decode > sathesh-android-signing-key.keystore
+
+      - name: Build Android app
+        run: cd android && ./gradlew assembleRelease
+      
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-cd-build-app
+          path: android/app/build/outputs/apk/release/app-release.apk
+          
