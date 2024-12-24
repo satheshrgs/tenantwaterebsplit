@@ -8,13 +8,14 @@
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "conventionalcommits",
+      "preset": "angular",
       "types": [
         { "type": "feat", "section": "Features" },
         { "type": "fix", "section": "Bug Fixes" },
         { "type": "chore", "section": "Chores" }
       ],
-      "infile": "CHANGELOG.md"
+      "infile": "CHANGELOG.md",
+      "releaseCount": 0
     }
   },
   "hooks": {
