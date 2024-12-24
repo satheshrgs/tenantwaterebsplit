@@ -1,8 +1,7 @@
 {
   "$schema": "https://unpkg.com/release-it/schema/release-it.json",
   "git": {
-    "commitMessage": "chore: release v${version}",
-    "requireCleanWorkingDir": false
+    "commitMessage": "chore: release v${version}"
   },
   "github": {
     "release": true
@@ -15,8 +14,7 @@
         { "type": "fix", "section": "Bug Fix" },
         { "type": "chore", "section": "Chores" }
       ],
-      "infile": "CHANGELOG.md",
-      "releaseCount": 0
+      "infile": "CHANGELOG.md"
     }
   },
   "hooks": {
