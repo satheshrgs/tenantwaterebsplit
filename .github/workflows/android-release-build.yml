@@ -78,5 +78,5 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.SATHESH_ANDROID_RELEASE_UPLOAD_SERVICE_ACCOUNT_JSON }}
           packageName: com.satheshrgs.tenantwaterebsplit
           track: internal
-          releaseFile: android/app/build/outputs/bundle/release/app-release.aab
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
           inAppUpdatePriority: 2
