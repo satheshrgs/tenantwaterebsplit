@@ -56,22 +56,32 @@ jobs:
       - name: Decode and write base64 key to keystore file from secret
         run: echo "${{ secrets.SATHESH_ANDROID_SIGNING_KEY_BASE64 }}" | base64 --decode > sathesh-android-signing-key.keystore
 
-      - name: Build Android app bundle
-        run: cd android && ./gradlew bundleRelease
+      - name: Build Android app bundle and APK
+        run: |
+          cd android
+          ./gradlew bundleRelease
+          ./gradlew assembleRelease
 
       - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
           name: android-release-build-app-bundle
           path: android/app/build/outputs/bundle/release/app-release.aab
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-release-build-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
       
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: android/app/build/outputs/bundle/release/app-release.aab
+          files: |
+            android/app/build/outputs/bundle/release/app-release.aab
+            android/app/build/outputs/apk/release/app-release.apk
 
-      
       - name: Upload App to Google Play
         uses: r0adkll/upload-google-play@v1
         with:
