@@ -70,7 +70,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: android-cd-build-app
+          name: android-cd-build-apk
           path: android/app/build/outputs/apk/release/app-release.apk
       
       - name: Post comment on PR
