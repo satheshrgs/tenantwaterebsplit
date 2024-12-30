@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.2](https://github.com/satheshrgs/tenantwaterebsplit/compare/0.0.1...0.0.2) (2024-12-30)
+
+### Chores
+
+* Add setup for upload to play store ([#11](https://github.com/satheshrgs/tenantwaterebsplit/issues/11)) ([f58214b](https://github.com/satheshrgs/tenantwaterebsplit/commit/f58214bfa39058a496256dc55893ccc7b72db412))
+* android release setup ([#10](https://github.com/satheshrgs/tenantwaterebsplit/issues/10)) ([b9d3024](https://github.com/satheshrgs/tenantwaterebsplit/commit/b9d30244facfcf98bdf096cdaf3f7089c6c72b9b))
+
 ## 0.0.1 (2024-12-24)
 
 ### Features
