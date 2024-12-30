@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+# Add permissions block at the top level
+permissions:
+  contents: write
+
 jobs:
   android-release-build:
     name: Android Release Build
